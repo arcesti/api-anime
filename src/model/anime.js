@@ -74,8 +74,7 @@ export default class Anime {
         this.#imagemPaisagem = value;
     }
 
-    constructor(id=0, titulo="", episodios=0, sinopse="", ano=0, popularidade=0, imagemRetrato="", imagemPaisagem="") {
-        this.#id = id;
+    constructor(titulo="", episodios=0, sinopse="", ano=0, popularidade=0, imagemRetrato="", imagemPaisagem="") {
         this.#titulo = titulo;
         this.#episodios = episodios;
         this.#sinopse = sinopse;

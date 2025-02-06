@@ -18,8 +18,7 @@ export default class AnimeDAO {
                     ano INTEGER,
                     popularidade REAL NOT NULL,
                     imagemRetrato VARCHAR(250),
-                    imagemPaisagem VARCHAR(250),
-                    CONSTRAINT pk_anime PRIMARY KEY (id)
+                    imagemPaisagem VARCHAR(250)
                 )
             `
             await conn.query(sql);
@@ -35,7 +34,7 @@ export default class AnimeDAO {
             try {
                 const conn = await conexao.connect();
                 const sql = `
-                    INSERT INTO anime ("titulo", "episodios", "sinopse", "ano", "popularidade", "imagemRetrato", "imagemPaisagem")
+                    INSERT INTO anime ("titulo", "episodios", "sinopse", "ano", "popularidade", "imagemretrato", "imagempaisagem")
                     VALUES ($1, $2, $3, $4, $5, $6, $7)
                     RETURNING id
                 `;
