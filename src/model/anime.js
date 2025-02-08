@@ -74,7 +74,8 @@ export default class Anime {
         this.#imagemPaisagem = value;
     }
 
-    constructor(titulo="", episodios=0, sinopse="", ano=0, popularidade=0, imagemRetrato="", imagemPaisagem="") {
+    constructor(id = 0, titulo="", episodios=0, sinopse="", ano=0, popularidade=0, imagemRetrato="", imagemPaisagem="") {
+        this.#id = id;
         this.#titulo = titulo;
         this.#episodios = episodios;
         this.#sinopse = sinopse;
@@ -100,5 +101,10 @@ export default class Anime {
     async incluir() {
         const animeDAO = new AnimeDAO();
         await animeDAO.incluir(this);
+    }
+
+    async consultar(id) {
+        const animeDAO = new AnimeDAO();
+        return await animeDAO.consultar(id);
     }
 }

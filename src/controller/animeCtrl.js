@@ -35,4 +35,34 @@ export default class AnimeCtrl {
             res.status(400).json({ message: "Requisição inválida!", status: false });
         }
     }
+
+    consultar(req, res) {
+        res.type("Application/json");
+        if (req.method === "GET") {
+            let id = req.params.id;
+            if (isNaN(id)) {
+                id = "";
+            }
+            const anime = new Anime();
+            anime.consultar(id)
+                .then((listaAnimes) => {
+                    res.status(200).json({
+                        status: true,
+                        listaAnimes
+                    })
+                })
+                .catch((err) => {
+                    res.status(500).json({
+                        status: false,
+                        message: `Não foi possível recuperar os animes! Erro : ${err.message}`
+                    })
+                })
+        }
+        else {
+            res.status(400).json({
+                status: false,
+                message: "Requisição inválida!"
+            })
+        }
+    }
 }

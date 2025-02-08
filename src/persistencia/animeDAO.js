@@ -57,4 +57,37 @@ export default class AnimeDAO {
             }
         }
     }
+
+    async consultar(id) {
+        let sql = "";
+        let params = [];
+        const conn = await conexao.connect();
+        console.log(id);
+        if(id) {
+            sql = "SELECT * FROM anime WHERE id = $1";
+            params = [id];
+        }
+        else {
+            sql = "SELECT * FROM anime"
+        }
+
+        console.log(sql);
+        const res = await conn.query(sql, params);
+        const linhas = res.rows;
+        let listaAnimes = [];
+        linhas.map((anime2) => {
+            const anime = new Anime(anime2.id,
+                                    anime2.titulo,
+                                    anime2.episodios,
+                                    anime2.sinopse,
+                                    anime2.ano,
+                                    anime2.popularidade,
+                                    anime2.imagemretrato,
+                                    anime2.imagempaisagem,
+                                    anime2.idapimal);
+            listaAnimes.push(anime);
+        })
+        conn.release();
+        return listaAnimes;
+    }
 }
